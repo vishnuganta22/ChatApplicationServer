@@ -3,4 +3,4 @@
 // TO START MYSQL SERVER
 
 
-sudo mysql -root -p
+sudo mysql -u root -p

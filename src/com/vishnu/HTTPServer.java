@@ -2,10 +2,8 @@ package com.vishnu;
 
 import com.sun.net.httpserver.HttpServer;
 import com.vishnu.databases.DatabaseHelper;
-import com.vishnu.handlers.ContactsHandler;
-import com.vishnu.handlers.EmailHandler;
-import com.vishnu.handlers.PingHandler;
-import com.vishnu.handlers.RegisterHandler;
+import com.vishnu.handlers.*;
+import com.vishnu.utils.Util;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -21,9 +19,11 @@ public class HTTPServer {
             httpServer.createContext("/ping", new PingHandler());
             httpServer.createContext("/register",new RegisterHandler());
             httpServer.createContext("/email",new EmailHandler());
-            httpServer.createContext("device//contacts",new ContactsHandler());
+            httpServer.createContext("/device/contacts",new ContactsHandler());
+            httpServer.createContext("/devices",new DevicesHandler());
             httpServer.setExecutor(null); // creates a default executor
             httpServer.start();
+            System.out.print(Util.TAG + " " + LOG_LABEL + " :: Server is started ::");
         } catch (IOException e) {
             e.printStackTrace();
         }
