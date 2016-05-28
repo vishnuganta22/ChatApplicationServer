@@ -21,8 +21,7 @@ import java.util.*;
 public class EmailHandler extends Thread implements HttpHandler {
     private static final String LOG_LABEL = "PingHandler";
     private HttpExchange httpExchange;
-    private GenerateOTP generateOTP;
-    public static HashMap<String, GenerateOTP> generateOTPMap = new HashMap<>();
+    static HashMap<String, GenerateOTP> generateOTPMap = new HashMap<>();
 
     @Override
     public void run() {
@@ -84,7 +83,7 @@ public class EmailHandler extends Thread implements HttpHandler {
                 }
             });
             String id = UUID.randomUUID().toString();
-            generateOTP = new GenerateOTP(id);
+            GenerateOTP generateOTP = new GenerateOTP(id);
             MimeMessage mail = new MimeMessage(session);
             mail.setFrom(new InternetAddress(fromAddress));
             mail.addRecipient(Message.RecipientType.TO, new InternetAddress(emailAddress));

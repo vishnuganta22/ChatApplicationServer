@@ -10,30 +10,29 @@ import java.util.Date;
 /**
  * Created by vishnu on 2/4/16.
  */
-public class GenerateOTP {
+class GenerateOTP {
     private static final String LOG_LABEL = "GenerateOTP";
-    protected static final int VALID_OTP = 1;
-    protected static final int INVALID_OTP = 2;
-    protected static final int OTP_EXPIRED = 3;
-    protected String id;
-    private Long timeStamp;
+    static final int VALID_OTP = 1;
+    private static final int INVALID_OTP = 2;
+    static final int OTP_EXPIRED = 3;
+    String id;
     private Long eTimeStamp;
     private String otp;
 
-    public GenerateOTP(String id) {
+    GenerateOTP(String id) {
         this.id = id;
     }
 
-    public String init() {
+    String init() {
         otp = id.replace("-", "");
         otp = otp.substring(9, 17);
         Date date = new Date();
-        this.timeStamp = date.getTime();
+        Long timeStamp = date.getTime();
         this.eTimeStamp = timeStamp + 300000;
         return otp;
     }
 
-    public int validateOTP(String JSON) {
+    int validateOTP(String JSON) {
         String clientOTP = null;
         String emailAddress = null;
         try {

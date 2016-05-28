@@ -18,7 +18,6 @@ import java.io.OutputStream;
 public class RegisterHandler extends Thread implements HttpHandler {
     private static final String LOG_LABEL = "RegisterHandler";
     private HttpExchange httpExchange;
-    private GenerateOTP generateOTP;
 
     @Override
     public void run() {
@@ -33,7 +32,7 @@ public class RegisterHandler extends Thread implements HttpHandler {
                 System.out.println(Util.TAG + " " + LOG_LABEL + " Request Body " + requestBody);
                 JSONObject OTPJSON = new JSONObject(requestBody);
                 String emailAddress = String.valueOf(OTPJSON.get("emailAddress"));
-                generateOTP = EmailHandler.generateOTPMap.get(emailAddress);
+                GenerateOTP generateOTP = EmailHandler.generateOTPMap.get(emailAddress);
                 if(generateOTP != null){
                     int otp_validation = generateOTP.validateOTP(requestBody);
                     if (otp_validation == GenerateOTP.VALID_OTP) {
