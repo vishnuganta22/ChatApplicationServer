@@ -66,7 +66,7 @@ public class DatabaseHelper {
                 if (tableStatement != null) {
                     tableStatement.close();
                 }
-            } catch (SQLException se2) {
+            } catch (SQLException ignored) {
             }// nothing we can do
             try {
                 if (connection != null)

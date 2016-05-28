@@ -15,7 +15,7 @@ public class HTTPServer {
         try {
             DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
             databaseHelper.checkForDatabase();
-            HttpServer httpServer = HttpServer.create(new InetSocketAddress(1555), 0);
+            HttpServer httpServer = HttpServer.create(new InetSocketAddress(2345), 0);
             httpServer.createContext("/ping", new PingHandler());
             httpServer.createContext("/register",new RegisterHandler());
             httpServer.createContext("/email",new EmailHandler());
@@ -24,7 +24,7 @@ public class HTTPServer {
             httpServer.setExecutor(null); // creates a default executor
             httpServer.start();
             System.out.print(Util.TAG + " " + LOG_LABEL + " :: Server is started ::");
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
