@@ -15,6 +15,8 @@ class GenerateOTP {
     static final int VALID_OTP = 1;
     private static final int INVALID_OTP = 2;
     static final int OTP_EXPIRED = 3;
+    static final int OTP_IS_NULL = 4;
+
     String id;
     private Long eTimeStamp;
     private String otp;
@@ -43,20 +45,23 @@ class GenerateOTP {
             e.printStackTrace();
         }
         Date date = new Date();
-        if (date.getTime() <= eTimeStamp && clientOTP.equals(otp)) {
-            Device device = new Device();
-            device.id = id;
-            device.email = emailAddress;
-            device.wallpaper = "";
-            device.isOnline = "true";
-            DeviceDAO deviceDAO = DeviceDAO.getInstance();
-            deviceDAO.putDevice(device);
-            return VALID_OTP;
-        } else {
-            if (date.getTime() > eTimeStamp) {
-                return OTP_EXPIRED;
+        if (clientOTP != null) {
+            if (date.getTime() <= eTimeStamp && clientOTP.equals(otp)) {
+                Device device = new Device();
+                device.id = id;
+                device.email = emailAddress;
+                device.wallpaper = "";
+                device.isOnline = "true";
+                DeviceDAO deviceDAO = DeviceDAO.getInstance();
+                deviceDAO.putDevice(device);
+                return VALID_OTP;
+            } else {
+                if (date.getTime() > eTimeStamp) {
+                    return OTP_EXPIRED;
+                }
+                return INVALID_OTP;
             }
-            return INVALID_OTP;
         }
+        return OTP_IS_NULL;
     }
 }
