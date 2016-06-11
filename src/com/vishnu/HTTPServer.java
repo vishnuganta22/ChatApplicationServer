@@ -15,7 +15,7 @@ public class HTTPServer {
         try {
             DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
             databaseHelper.checkForDatabase();
-            HttpServer httpServer = HttpServer.create(new InetSocketAddress(2345), 0);
+            HttpServer httpServer = HttpServer.create(new InetSocketAddress(8080), 0);
             httpServer.createContext("/ping", new PingHandler());
             httpServer.createContext("/register",new RegisterHandler());
             httpServer.createContext("/email",new EmailHandler());
