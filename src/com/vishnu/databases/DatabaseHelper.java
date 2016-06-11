@@ -37,7 +37,7 @@ public class DatabaseHelper {
             ResultSet resultSet = connection.getMetaData().getCatalogs();
             while (resultSet.next()) {
                 String databaseName = resultSet.getString(1);
-                if (databaseName.equals(DATABASENAME)) {
+                if (databaseName.equalsIgnoreCase(DATABASENAME)) {
                     alreadyExists = true;
                     System.out.println("already database is created");
                     break;
